@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>📅 Pharmacies de Garde</h2>
+  
+    <div class="form">
+      <input type="date" [(ngModel)]="dateDebut" />
+      <input type="date" [(ngModel)]="dateFin" />
+      <button (click)="chercherGardes()">🔍 Rechercher</button>
+    </div>
+  
+    <div *ngIf="loading" class="loading">Chargement...</div>
+  
+    <div class="cards" *ngIf="!loading && gardes.length > 0">
+      <div class="card" *ngFor="let garde of gardes">
+        <h3>{{ garde.pharmacie.nom }}</h3>
+        <p><strong>📍 Adresse :</strong> {{ garde.pharmacie.adresse }}</p>
+        <p *ngIf="garde.pharmacie.telephone"><strong>📞 Téléphone :</strong> {{ garde.pharmacie.telephone }}</p>
+        <p *ngIf="garde.pharmacie.horaires"><strong>🕐 Horaires :</strong> {{ garde.pharmacie.horaires }}</p>
+        <p><strong>🗓️ Garde :</strong> du {{ garde.dateDebut }} au {{ garde.dateFin }}</p>
+  
+        <div *ngIf="garde.pharmacie.latitude && garde.pharmacie.longitude">
+          <a [href]="'https://www.google.com/maps?q=' + garde.pharmacie.latitude + ',' + garde.pharmacie.longitude" target="_blank">
+            📌 Voir sur la carte
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!loading && gardes.length === 0">
+      Aucune pharmacie de garde trouvée.
+    </div>
+  </div>
+  

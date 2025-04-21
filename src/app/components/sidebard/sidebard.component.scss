@@ -1,0 +1,86 @@
+.lara-sidenav-container {
+    height: 100vh;
+  
+    .lara-sidenav {
+      width: 300px;
+      background-color: #ffffff; // Fond blanc pur pour la barre latérale
+      border-right: 1px solid #e0e0e0; // Bordure grise claire
+      box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05); // Légère ombre
+      padding-top: 1rem;
+  
+      .sidenav-header {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: #212121; // Noir profond pour le titre
+      }
+  
+      mat-nav-list {
+        a {
+         
+          border-radius: 8px; // Coins légèrement arrondis
+          padding: 10px 16px;
+          display: flex; // Utilisation de flex pour aligner les éléments
+          align-items: center; // Centre verticalement l'icône et le texte
+          gap: 12px; // Espace entre l'icône et le texte
+          text-decoration: none;
+          transition: background-color 0.3s ease, color 0.3s ease;
+  
+          mat-icon {
+            font-size: 22px;
+            color: #616161; // Gris moyen pour les icônes
+          }
+  
+          span {
+            font-size: 15px;
+            color: #424242; // Gris foncé pour le texte
+          }
+  
+          &:hover {
+            background-color: #f5f5f5; // Fond gris clair au survol
+          }
+  
+          &.active-link {
+            background-color: #e0e0e0; // Fond gris moyen pour le lien actif
+  
+            mat-icon,
+            span {
+              color: #212121; // Noir profond pour le texte et l'icône du lien actif
+            }
+  
+            span {
+              font-weight: 600; // Texte en gras pour le lien actif
+            }
+          }
+        }
+  
+        .nav-item {
+          display: flex;
+          align-items: center; // Centre verticalement l'icône et le texte
+        }
+  
+        .nav-item mat-icon {
+          margin-right: 8px; // Espacement entre l'icône et le texte
+          vertical-align: middle; // Assure que l'icône est alignée avec le texte
+          font-size: 20px; // Ajustez la taille si nécessaire
+          line-height: 1; // Supprime tout décalage vertical
+        }
+      }
+    }
+  
+    .lara-sidenav-content {
+      background-color: #ffffff; // Fond blanc pour le contenu principal
+  
+      .lara-toolbar {
+        background-color: #ffffff; // Fond blanc pour la barre d'outils
+        color: #212121; // Noir profond pour le texte de la barre d'outils
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Légère ombre
+      }
+  
+      .main-content {
+        padding: 24px;
+        color: #212121;
+      }
+    }
+  }

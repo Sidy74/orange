@@ -1,0 +1,90 @@
+<div class="modal-container">
+  <!-- Header fixe -->
+  <div class="modal-header">
+    <h2>Ajouter une garde</h2>
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+      <label for="gardeDate" style="font-weight: bold;">Jour de garde :</label>
+      <input 
+        id="gardeDate" 
+        type="date" 
+        [(ngModel)]="selectedDate" 
+        style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;"
+      />
+    </div>
+  </div>
+
+  <!-- Contenu du modal -->
+  <div class="modal-content">
+    <!-- Recherche et filtre -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearch()" 
+          placeholder="Rechercher une pharmacie..." 
+          style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 200px;"
+        />
+        <button 
+          (click)="onFilter()"
+          style="padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+        >
+          Filtrer
+        </button>
+      </div>
+    </div>
+
+    <!-- Tableau des pharmacies -->
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+      <thead style="background-color: #000; color: #fff;">
+        <tr>
+          <th style="padding: 10px; text-align: left;">#</th>
+          <th style="padding: 10px; text-align: left;">Nom</th>
+          <th style="padding: 10px; text-align: left;">Code</th>
+          <th style="padding: 10px; text-align: left;">Statut</th>
+          <th style="padding: 10px; text-align: left;">Sélectionner</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(filteredPharmacies.length === 0) {
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 20px;">Aucune pharmacie trouvée</td>
+          </tr>
+        } 
+        @else {
+        <tr *ngFor="let pharmacie of filteredPharmacies; let i = index">
+          <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ i + 1 }}</td>
+          <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ pharmacie.pharmacieModel.name }}</td>
+          <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ pharmacie.pharmacieModel.code }}</td>
+          <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ pharmacie.pharmacieModel.isEnabled ? 'Actif' : 'Inactif' }}</td>
+          <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: center;">
+            <input 
+              type="checkbox" 
+              [(ngModel)]="pharmacie.selected" 
+            />
+          </td>
+        </tr>}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer">
+    <div style="display: flex; justify-content: flex-end; gap: 8px;">
+      <button
+        style="padding: 8px 16px; background-color: #ddd; color: #000; border: none; border-radius: 4px; cursor: pointer;"
+        mat-dialog-close
+          (click)="onClose()"
+      >
+        Annuler
+      </button>
+      <button
+      (click)="onSubmit()"
+        style="padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+        type="submit"
+      >
+        Ajouter
+      </button>
+   
+  </div>
+</div>

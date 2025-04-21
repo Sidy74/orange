@@ -1,0 +1,20 @@
+<p></p>
+<div class="modal-container">
+  <h2 style="margin-bottom: 20px;">Confirmation</h2>
+  <p style="margin-bottom: 20px;">{{ data.message }}</p>
+
+  <div style="display: flex; justify-content: flex-end; gap: 8px;">
+    <button 
+      style="padding: 8px 16px; background-color: #ddd; color: #000; border: none; border-radius: 4px; cursor: pointer;"
+      mat-dialog-close
+    >
+      Annuler
+    </button>
+    <button 
+      style="padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+      [mat-dialog-close]="true"
+    >
+      Confirmer
+    </button>
+  </div>
+</div>

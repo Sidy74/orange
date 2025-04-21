@@ -1,0 +1,98 @@
+<div>
+  <!-- Header avec les date pickers et le bouton -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <!-- Sélection de la période -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <input 
+        type="date" 
+        [(ngModel)]="startDate" 
+        placeholder="Date de début" 
+        style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;"
+      />
+      <input 
+        type="date" 
+        [(ngModel)]="endDate" 
+        placeholder="Date de fin" 
+        style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;"
+      />
+      <button 
+      (click)="onFilter()"
+      style="padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+    >
+      Filtrer
+    </button>
+    </div>
+
+    <!-- Bouton Ajouter une garde -->
+    <button 
+      (click)="addGarde()"
+      style="padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+    >
+      Ajouter une garde
+    </button>
+  </div>
+
+  <!-- Section de recherche et filtre -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <!-- Recherche -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="onSearch()" 
+        placeholder="Rechercher une pharmacie..." 
+        style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 200px;"
+      />
+    
+    </div>
+  </div>
+
+  <!-- Tableau des gardes -->
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+    <thead style="background-color: #000; color: #fff;">
+      <tr>
+        <th style="padding: 10px; text-align: left;">#</th>
+        <th style="padding: 10px; text-align: left;">Nom</th>
+        <th style="padding: 10px; text-align: left;">Code</th>
+        <th style="padding: 10px; text-align: left;">Jours de Garde</th>
+        <th style="padding: 10px; text-align: left;">Statut</th>
+        <th style="padding: 10px; text-align: left;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (garde of filteredGardes; track $index) {
+      <tr>
+        <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ $index + 1 }}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ garde.name }}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ garde.code }}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <span *ngFor="let jour of garde.joursDeGarde | slice:0:3" style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 4px;">
+              {{ jour }}
+            </span>
+            <mat-icon 
+            *ngIf="garde.joursDeGarde.length > 3" 
+            (click)="showAllDays(garde.joursDeGarde)" 
+            style="cursor: pointer; color: black;"
+          >
+            more_horiz
+          </mat-icon>
+         
+          </div>
+        </td>
+        <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+          {{ garde.enabled ? 'Actif' : 'Inactif' }}
+        </td>
+        <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: center;">
+          <mat-icon 
+            style="cursor: pointer; color: #000;" 
+            (click)="viewDetails(garde)"
+          >
+            visibility
+          </mat-icon>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

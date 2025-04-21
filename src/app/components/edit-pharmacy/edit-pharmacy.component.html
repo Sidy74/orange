@@ -1,0 +1,38 @@
+<p></p>
+
+<div class="modal-container">
+  <h2 style="margin-bottom: 20px;">Modifier {{pharmacie.code}}</h2>
+  <form style="display: flex; flex-direction: column; gap: 16px;">
+    <!-- Champ Nom -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <label for="name" style="font-weight: bold;">Nom</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="pharmacie.name"
+        name="name"
+        placeholder="Entrez le nom de la pharmacie"
+        style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;"
+        required
+      />
+    </div>
+
+    <!-- Boutons -->
+    <div style="display: flex; justify-content: flex-end; gap: 8px;">
+      <button
+        style="padding: 8px 16px; background-color: #ddd; color: #000; border: none; border-radius: 4px; cursor: pointer;"
+        mat-dialog-close
+        (click)="onClose()"
+      >
+        Annuler
+      </button>
+      <button
+        (click)="onSubmit()"
+        style="padding: 8px 16px; background-color: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+        type="submit"
+      >
+        Modifier
+      </button>
+    </div>
+  </form>
+</div>
